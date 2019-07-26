@@ -1,0 +1,25 @@
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) ;
+    box-sizing: border-box;
+    grid-gap: 0;
+}
+.gallery div {
+    margin: 0 auto;
+    line-height: 0;
+}
+.gallery img {
+    width: 100%; 
+    object-fit: cover;
+    height: 238px;
+}
+@media only screen and (max-width: 960px){
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 480px){
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
