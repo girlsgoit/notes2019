@@ -3,7 +3,7 @@
   <section class="tool-bar">
     <div class="tool-bar-container">
       <h1>Dashboard</h1>
-      <button @click=" createNewNote()">NEW NOTE</button>
+      <button @click="createNewNote()">NEW NOTE</button>
     </div>
   </section>
   <!-- end of tool-bar -->
@@ -20,12 +20,12 @@
             }
         },
         methods: {
-            createNewNote: function () {
+            createNewNote: function() {
                 axios.post('/notes/', {})
                     .then(response => {
                         this.noteId = response.data.id;
-                        this.$router.push('/notes/' + this.noteId);
-                    });
+                        this.$router.push('/note/'+ this.noteId);
+                     });
             }
         }
     }
