@@ -6,6 +6,7 @@ import Home from './components/Home.vue'
 import Login from './components/Login.vue'
 import Settings from './components/Settings.vue'
 import Register from './components/Register.vue';
+import Help from './components/Help.vue';
 import Axios from 'axios'
 
 Axios.defaults.baseURL = 'https://notes-api.girlsgoit.org/';
@@ -31,6 +32,7 @@ const rute = [
   { path: "/login", component: Login },
   { path: '/register', components: Register },
   { path: "/note/:id", component: Note },
+  { path: "/help", component: Help },
 ];
 
 const router = new VueRouter({
