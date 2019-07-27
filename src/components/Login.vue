@@ -82,11 +82,11 @@ export default {
           if (token) {
             localStorage.setItem("NOTES_AUTH", token);
           }
-          this.$router.push("/notes");
         })
         .catch(err => {
           console.log(err);
         });
+        
       axios
         .get("users/me")
         .then(response => {
@@ -95,7 +95,7 @@ export default {
           localStorage.setItem("id", user.id);
           localStorage.setItem("full_name", user.full_name);
 
-          this.$router.push("/");
+          this.$router.push("/notes");
         })
         .catch(() => {
          console.log(err);
