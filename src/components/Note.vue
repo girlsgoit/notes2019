@@ -6,11 +6,11 @@
         <span v-if="blocks.length===0" class="note-editor-empty"></span>
         <div v-for="(block, index) in blocks" :key="index">
           <span class="note-editor-add" @click="add(index)"></span>
-          <ShowComponent :block='block'/>
+          <ShowComponent :block="block" />
         </div>
         <span class="note-editor-add" @click="add(blocks.length)"></span>
         <!-- <button @click="add(blocks.length)">+</button> -->
-        <button class="note-editor-delete" @click="totaldelete()"  >Delete this note</button>
+        <button class="note-editor-delete" @click="totaldelete()">Delete this note</button>
       </section>
 
       <div :class="{visible: !isActive}">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ShowComponent from "./ShowComponent.vue"
+import ShowComponent from "./ShowComponent.vue";
 import Editor from "./Editor.vue";
 import axios from "axios";
 
@@ -50,11 +50,11 @@ export default {
       isActive: false
     };
   },
-  created: function(){ 
-      this.id=this.$route.params.id;
-      this.getNotes(); 
-  }, 
- 
+  created: function() {
+    this.id = this.$route.params.id;
+    this.getNotes();
+  },
+
   methods: {
     save: function(tag, content) {
       let newBlock = {
@@ -63,8 +63,7 @@ export default {
       };
       this.blocks.splice(this.currentIndex, 0, newBlock);
       this.currentIndex++;
-      xios.post()
-      .then(response => (this.blocks = response.data.note_elements))
+      axios.post().then(response => (this.blocks = response.data.note_elements));
     },
     add: function(position) {
       this.currentIndex = position;
@@ -74,19 +73,26 @@ export default {
       this.isActive = false;
     },
     getNotes: function() {
-      axios.get('notes/' + this.id)
-      .then(response => (this.blocks = response.data.note_elements))
-     
+      axios
+        .get("notes/" + this.id)
+        .then(response => (this.blocks = response.data.note_elements))
+        // .catch(error => {console.log(error)});
     },
-    totalDelete: function(){
-        axios.delete('notes/' + this.id)
-      .then(response => (this.blocks = response.data.note_elements))
+    totalDelete: function() {
+      axios
+        .delete("notes/" + this.id)
+        .then(response => (this.blocks = response.data))
+        // .catch(error => {console.log(error)});
     },
-    oneDelete(){
-        this.blocks.splice(this.currentIndex, 1)
-    }
+    oneDelete() {
+      this.blocks.splice(this.currentIndex, 1);
+        // axios
+        // .post("notes/" + this.id)
+        // .then(response => (this.blocks = response.data.note_elements))
+        // .catch(error => console.log(error));
     }
   }
+};
 </script>
 
 <style scoped>
