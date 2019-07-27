@@ -1,0 +1,63 @@
+<template>
+    <section class="gallery">
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67516618_2372345823005190_7451678725671747584_o.jpg?_nc_cat=102&_nc_oc=AQmD4nq0tBkYTSOpHnGXR56x0sO18pOsiIwXDwVqeH1KlF6f248Zogeap2T3Rg9L83k&_nc_ht=scontent.fkiv1-1.fna&oh=77a4a4ada1a64332cbfd965974acf00f&oe=5DB14C5F">
+    </div>
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67309780_2371485633091209_6736434854046466048_o.jpg?_nc_cat=109&_nc_oc=AQnTJAnJUXuqhBvZ_VLCCc6m5in2mvF_8WlMx4mpo0o0Bvu4cQ3ZrRb-P4eeqgPMwz0&_nc_ht=scontent.fkiv1-1.fna&oh=b53e15cf52eab7bbc7efdc032aa394a1&oe=5DB3B108">
+    </div>
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/66811589_2372346113005161_8363943158165274624_o.jpg?_nc_cat=110&_nc_oc=AQmBVDybCe2wwOK8zBTdl0Wh2JHYSJQNTTG7IaWY7ekmWZ6J45wPMHZh7YDqTnIe0eU&_nc_ht=scontent.fkiv1-1.fna&oh=fac40d0205ed04fcfc0613a30f93826f&oe=5DE58D96">
+    </div>
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67403885_2373094476263658_3603554316704546816_n.jpg?_nc_cat=104&_nc_oc=AQnYO5NoN0eh-tYdaNYIoEaQUUnTeMg3jQAnQUEsgW4uDF1clqT3SZDOqWT2AE3Pfpk&_nc_ht=scontent.fkiv1-1.fna&oh=3a0e4b29b567bf73972c6bd3b2cc8a7f&oe=5DB0E1EE">
+    </div>
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67108206_2372345813005191_6946736699334459392_n.jpg?_nc_cat=103&_nc_oc=AQmOJ8yc6gix0wTvcji0jjfjbLjEiiP7TFJsfywMd-k2JdceF3F4GAK44TwWux8ANpU&_nc_ht=scontent.fkiv1-1.fna&oh=13e9665c56f932253b3eac4379b18eab&oe=5DAD7A5E">
+    </div>
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67107199_2372346246338481_6520818772708687872_o.jpg?_nc_cat=102&_nc_oc=AQl__eeDszEO7ELoCFcyuKWaSFP3mNnVl5gEfH_wl4pcVrr8rOz5csPWY7aYa6-csDc&_nc_ht=scontent.fkiv1-1.fna&oh=c6c7fcbc3d5a6cfc8835ed6f100bf8a1&oe=5DABD88B">
+    </div>
+    <div>
+      <img src="https://educattekedu-my.sharepoint.com/personal/girlsgoit_tekedu_org/Documents/GirlsGoIT/2019/Summer%20Camp/Summer%20Camp%20Photos/Day%204/DSC07806.jpg">
+    </div>
+    <div>
+      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67085742_2371017709804668_426974613134639104_o.jpg?_nc_cat=101&_nc_oc=AQmNlvjjQjy94p60bVmCETEqX8ILaM2PZ-BjUREB8bpQljjkbQt_cCBKcnBiHYj0n5I&_nc_ht=scontent.fkiv1-1.fna&oh=ea85c9cafbf4e2d9470a7dce1c60b41d&oe=5DA9ABB6">
+    </div>
+  </section>
+</template>
+<script>
+
+export default {
+  name: "Gallery",
+  }
+
+</script>
+
+<style scoped>
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) ;
+    box-sizing: border-box;
+    grid-gap: 0;
+}
+.gallery div {
+    margin: 0 auto;
+    line-height: 0;
+}
+.gallery img {
+    width: 100%;
+    object-fit: cover;
+    height: 238px;
+}
+@media only screen and (max-width: 960px){
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 480px){
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
