@@ -24,7 +24,7 @@
                 axios.post('/notes/', {})
                     .then(response => {
                         this.noteId = response.data.id;
-                        this.$router.push('/note/'+ this.noteId);
+                        this.$router.push('/notes/'+ this.noteId);
                      });
             }
         }
