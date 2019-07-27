@@ -7,10 +7,10 @@
         <div v-for="(block, index) in blocks" :key="index">
           <span class="note-editor-add" @click="add(index)"></span>
           <ShowComponent :block="block" />
+          <button @click="oneDelete(index)"></button>
         </div>
         <span class="note-editor-add" @click="add(blocks.length)"></span>
-        <!-- <button @click="add(blocks.length)">+</button> -->
-        <button class="note-editor-delete" @click="totaldelete()">Delete this note</button>
+        <button class="note-editor-delete" @click="totalDelete()">Delete this note</button>
       </section>
 
       <div :class="{visible: !isActive}">
@@ -19,7 +19,7 @@
           :index="currentIndex"
           @blockAdded="blocks=($event)"
           @indexAdded="currentIndex=($event)"
-        />
+        /> 
       </div>
     </div>
   </article>
@@ -76,20 +76,25 @@ export default {
       axios
         .get("notes/" + this.id)
         .then(response => (this.blocks = response.data.note_elements))
-        // .catch(error => {console.log(error)});
+        .catch(error => {console.log(error)});
     },
     totalDelete: function() {
       axios
         .delete("notes/" + this.id)
-        .then(response => (this.blocks = response.data))
-        // .catch(error => {console.log(error)});
+        .then(response => {
+              this.blocks = response.data;
+              console.log(response);
+              this.blocks = ''
+              })
+        .catch(error => {console.log(error)});
+        this.blocks = ''; 
     },
-    oneDelete() {
-      this.blocks.splice(this.currentIndex, 1);
-        // axios
-        // .post("notes/" + this.id)
-        // .then(response => (this.blocks = response.data.note_elements))
-        // .catch(error => console.log(error));
+    oneDelete(index) {
+      this.blocks.splice(index, 1);
+        axios
+        .post("notes/" + this.id, this.blocks)
+        .then(response => (this.blocks = response.data.note_elements))
+        .catch(error => console.log(error));
     }
   }
 };

@@ -40,6 +40,7 @@ export default {
         tag: tag,
         content: content
       };
+      this.cont= '';
       this.blocksMod.splice(this.indexMod, 0, newBlock);
       this.indexMod++;
       this.$emit("blockAdded", this.blocksMod);
