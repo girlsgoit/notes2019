@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 import VueRouter from 'vue-router';
-import Note from './components/Note.vue'
-import Home from './components/Home.vue'
-import Login from './components/Login.vue'
-import Settings from './components/Settings.vue'
+import Note from './components/Note.vue';
+import Home from './components/Home.vue';
+import Login from './components/Login.vue';
+import Settings from './components/Settings.vue';
 import Register from './components/Register.vue';
 import Help from './components/Help.vue';
-import Axios from 'axios'
+import Axios from 'axios';
 
 Axios.defaults.baseURL = 'https://notes-api.girlsgoit.org/';
 
@@ -23,14 +23,13 @@ Axios.interceptors.request.use(function (config) {
   console.log(error);
 });
 
-
 Vue.use(VueRouter);
 
 const rute = [
-  { path: "/", component: Home },
+  { path: '/', component: Home },
+  { path: '/login', component: Login },
+  { path: '/register', component: Register },
   { path: "/users/:id", component: Settings },
-  { path: "/login", component: Login },
-  { path: '/register', components: Register },
   { path: "/note/:id", component: Note },
   { path: "/help", component: Help },
 ];
@@ -46,4 +45,3 @@ new Vue({
   render: h => h(App),
   router
 }).$mount('#app');
-
