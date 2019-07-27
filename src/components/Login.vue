@@ -2,7 +2,7 @@
   <div class="auth">
     <img src="../assets/images/logo.svg" alt="Logo" />
 
-    <div v-if="!isCorrectPassword || !isCorrectUserName" class="error-list">
+    <div v-if="!isCorrectPassword || !isCorrectUserName || isResponseError" class="error-list">
       <p>*Something went wrong.</p>
     </div>
 
@@ -27,7 +27,7 @@
 
       <div class="auth-buttons">
         <div>
-          <input type="submit" name="Login" value="Login" id="Login" />
+          <input type="submit" name="Login" value="Login" id="Login" @click="login" />
         </div>
         <div>
           <a href="#">REGISTER</a>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "Login",
   data: function() {
@@ -45,7 +47,8 @@ export default {
       userName: "",
       password: "",
       isCorrectUserName: true,
-      isCorrectPassword: true
+      isCorrectPassword: true,
+      isResponseError: false,
     };
   },
   methods: {
@@ -69,7 +72,18 @@ export default {
         username: this.userName,
         password:this.password
       };
-      axios.post("users/login")
+
+      axios.post('users/login', json)
+      .then(response => {
+        const token = response.data && response.data.token;
+        if (token) {
+          localStorage.setItem('NOTES_AUTH', token);
+        }
+        this.$router.push('/'); 
+      })
+      .catch(() => {
+        this.isResponseError = true;
+      });
     }
   }
 

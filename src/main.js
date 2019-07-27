@@ -1,16 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router';
+import Note from './components/Note.vue'
 import Home from './components/Home.vue'
 import Login from './components/Login.vue'
 import Settings from './components/Settings.vue'
+import Register from './components/Register.vue';
+import Axios from 'axios'
+
+Axios.defaults.baseURL = 'https://notes-api.girlsgoit.org/';
 
 Vue.use(VueRouter);
 
 const rute = [
- {path: "/", component: Home},
- { path: "/settings", component: Settings},
- { path: "/login", component: Login},
+  { path: "/", component: Home },
+  { path: "/settings", component: Settings },
+  { path: "/login", component: Login },
+  { path: '/register', components: Register },
+  { path: "/note/:id", component: Note },
 ];
 
 const router = new VueRouter({
@@ -18,10 +25,10 @@ const router = new VueRouter({
   mode: 'history'
 });
 
-Vue.config.productionTip = false
-
+Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App),
   router
-}).$mount('#app')
+}).$mount('#app');
+
