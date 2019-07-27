@@ -30,10 +30,10 @@ const rute = [
   { path: '/', component: Home },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
-  { path: "/users/:id", component: Settings },
-  { path: "/note/:id", component: Note },
-  { path: "/help", component: Help },
   { path: "/notes", component: DashboardList },
+  { path: "/notes/:id", component: Note },
+  { path: "/users/:id", component: Settings },
+  { path: "/help", component: Help },
 ];
 
 const router = new VueRouter({
