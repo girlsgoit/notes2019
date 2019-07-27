@@ -19,7 +19,7 @@
       <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67107199_2372346246338481_6520818772708687872_o.jpg?_nc_cat=102&_nc_oc=AQl__eeDszEO7ELoCFcyuKWaSFP3mNnVl5gEfH_wl4pcVrr8rOz5csPWY7aYa6-csDc&_nc_ht=scontent.fkiv1-1.fna&oh=c6c7fcbc3d5a6cfc8835ed6f100bf8a1&oe=5DABD88B">
     </div>
     <div>
-      <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67063461_2373094446263661_5717294897740906496_o.jpg?_nc_cat=107&_nc_oc=AQkc8dqb48AdO3_eP9rPn2pjN9CJdfFB11DCyr4ZwhTWC10nejDaMvywANeRodeIqgw&_nc_ht=scontent.fkiv1-1.fna&oh=21eb8103f49b5974dbb3621a10598f74&oe=5DAAC015">
+      <img src="https://educattekedu-my.sharepoint.com/personal/girlsgoit_tekedu_org/Documents/GirlsGoIT/2019/Summer%20Camp/Summer%20Camp%20Photos/Day%204/DSC07806.jpg">
     </div>
     <div>
       <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t1.0-9/67085742_2371017709804668_426974613134639104_o.jpg?_nc_cat=101&_nc_oc=AQmNlvjjQjy94p60bVmCETEqX8ILaM2PZ-BjUREB8bpQljjkbQt_cCBKcnBiHYj0n5I&_nc_ht=scontent.fkiv1-1.fna&oh=ea85c9cafbf4e2d9470a7dce1c60b41d&oe=5DA9ABB6">
@@ -46,7 +46,7 @@ export default {
     line-height: 0;
 }
 .gallery img {
-    width: 100%; 
+    width: 100%;
     object-fit: cover;
     height: 238px;
 }
