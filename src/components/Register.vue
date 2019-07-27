@@ -3,7 +3,7 @@
     <img src="../assets/images/logo.svg" alt="Logo" />
 
     <div v-if="errorMessages.length !== 0" class="error-list">
-      <p v-for="error in errorMessages" :key="error.id">{{error.message}}</p>
+      <p v-for="(error, index) in errorMessages" :key="index">{{error.message}}</p>
     </div>
 
     <form v-on:submit.prevent="onSubmit" class="auth-form">
@@ -24,7 +24,7 @@
           <input type="submit" name="Register" value="REGISTER" />
         </div>
         <div>
-          <a href="#">LOG IN</a>
+          <a href="/login">LOG IN</a>
         </div>
       </div>
     </form>
@@ -32,12 +32,7 @@
 </template>
 
 <script>
-
-function isValidEmail(email) {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return emailRegex.test(email);
-}
+import axios from 'axios';
 
 export default {
   name: "Register",
@@ -46,16 +41,16 @@ export default {
       form: {
         password: "",
         passConfirm: "",
-        email: "",
+        userName: "",
         fullName: ""
       },
 
       errorMessages: [],
       inputInfoList: [
         {
-          name: "email",
+          name: "userName",
           type: "text",
-          placeholder: "Email",
+          placeholder: "UserName",
           class: { error: false }
         },
         {
@@ -89,11 +84,16 @@ export default {
 
       
 
-      if (this.form.email === "") {
-        this.errorMessages.push({ message: "Email is required", id: 0 });
-      } else if (!isValidEmail(this.form.email)) {
-        this.errorMessages.push({ message: "Email is not valid", id: 0 });
+      if (this.form.userName === "") {
+        this.errorMessages.push({ message: "UserName is required", id: 0 });
       } else {
+        axios.post('/users/is-unique', {username: this.form.userName })
+        .then()
+        .catch(error => {
+          this.errorMessages.push({message: "User Name is already registered", id:0 });
+          this.inputInfoList[0].class.error = true;  
+        });
+
         
       }
 
@@ -116,6 +116,21 @@ export default {
 
        for (let error of this.errorMessages) {
          this.inputInfoList[error.id].class.error = true;  
+       }
+       if (this.errorMessages.length==0 ){
+        const user = {
+          username: this.form.userName,
+          full_name: this.form.fullName,
+          password: this.form.password,
+        };
+
+         axios.post('/users/register', user)
+         .then(response => {
+           this.$router.push('/login');
+         })
+         .catch(error => {
+           this.errorMessages.push({ message : " Register Error"})
+         });
        }
     }
   }
