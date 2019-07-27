@@ -27,7 +27,7 @@ Vue.use(VueRouter);
 
 const rute = [
   { path: "/", component: Home },
-  { path: "/settings", component: Settings },
+  { path: "/users/:id", component: Settings },
   { path: "/login", component: Login },
   { path: '/register', components: Register },
   { path: "/note/:id", component: Note },
