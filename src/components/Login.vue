@@ -86,7 +86,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-        
+
       axios
         .get("users/me")
         .then(response => {
@@ -97,8 +97,8 @@ export default {
 
           this.$router.push("/notes");
         })
-        .catch(() => {
-         console.log(err);
+        .catch(error => {
+         console.log(error);
         });
     }
   }
