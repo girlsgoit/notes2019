@@ -10,6 +10,19 @@ import Axios from 'axios'
 
 Axios.defaults.baseURL = 'https://notes-api.girlsgoit.org/';
 
+Axios.interceptors.request.use(function (config) {
+  const token = localStorage.getItem('NOTES_AUTH');
+
+  if (token) {
+    config.headers['Authorization'] = 'Token ' + token;
+  }
+
+  return config;
+}, function(error) {
+  console.log(error);
+});
+
+
 Vue.use(VueRouter);
 
 const rute = [

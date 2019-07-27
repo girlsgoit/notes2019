@@ -30,7 +30,7 @@
           <input type="submit" name="Login" value="Login" id="Login" @click="login" />
         </div>
         <div>
-          <a href="#">REGISTER</a>
+          <a href="/register">REGISTER</a>
         </div>
       </div>
     </form>
@@ -82,7 +82,7 @@ export default {
         this.$router.push('/'); 
       })
       .catch(() => {
-        this.isResponseError = true;
+        // this.isResponseError = true;
       });
     }
   }
