@@ -129,7 +129,7 @@ export default {
            this.$router.push('/login');
          })
          .catch(error => {
-           this.errorMessages.push({ message : " Register Error"})
+           this.errorMessages.push({ message : "Register Error"})
          });
        }
     }
