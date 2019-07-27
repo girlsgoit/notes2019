@@ -2,12 +2,12 @@
     <header class="header">
         <div class="header-container">
             <div class="header-left">
-                <a href="#" class="headerleft">
+                <a href="/login" class="headerleft">
                     SIGN IN
                 </a>
             </div>
             <div class="header-middle">
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <img src="../assets/images/logo.svg" alt="Logo">
                 </a>
             </div>
@@ -15,7 +15,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="/register">
                                 REGISTER
                             </a>
                         </li>
@@ -29,7 +29,7 @@
 
 <script>
 export default {  
-    name: 'Help',
+    name: 'HeaderLoggedOut',
 
 }
 </script>

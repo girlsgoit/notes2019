@@ -3,11 +3,11 @@
         <div class="header-container">
             <div class="header-left">
                 <a href="/settings" class="headerleft">
-                    {{ user.name }}
+                    {{user.fullName}}
                 </a>
             </div>
             <div class="header-middle">
-                <a href="home" class="logo">
+                <a href="/" class="logo">
                     <img src="../assets/images/logo.svg" alt="Logo">
                 </a>
                 
@@ -15,12 +15,21 @@
             <div class="header-right">
                 <nav>
                     <ul>
-                        <li v-for="headerBtn in headerBtns" :key="headerBtn.route">
-                            <a :href="headerBtn.route">
-                                {{headerBtn.title}}
+                        <li>
+                            <a href="" @click="redirectToSettings()">
+                                SETTINGS
                             </a>
                         </li>
-                        
+                        <li>
+                            <a href="/help">
+                                HELP
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" @click="redirectToSignOut()">
+                                SIGN OUT
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -28,34 +37,20 @@
     </header>
 </template>
 
-
-
-
 <script>
 export default {
     name:'HeaderLoggedIn',
     props: ['user'],
-    data: function() {
-        return {
-            headerBtns: [
-                {
-                    route: './settings',
-                    title: 'SETTINGS'
-                },
-            
-             
-                {
-                    route: './help',
-                    title: 'HELP'
-                },
-                {
-                    route: './sign-in',
-                    title: 'SIGN IN'
-                },
-            
-                
-            ],
-
+    methods: {
+        redirectToSettings: function(){
+            this.$router.push('/users/' + this.user.id);
+        },
+        redirectToSignOut: function(){
+            localStorage.removeItem("NOTES_AUTH");
+            localStorage.removeItem("full_name");
+            localStorage.removeItem("username");
+            localStorage.removeItem("id");
+            this.$router.push('/');
         }
     }
 }

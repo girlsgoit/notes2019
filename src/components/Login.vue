@@ -8,7 +8,8 @@
 
     <form class="auth-form" @submit="checkForm">
       <div class="auth-inputs">
-        <input @input="validation"
+        <input
+          @input="validation"
           type="text"
           v-bind:class="{ error : !isCorrectUserName }"
           name="UserName"
@@ -17,7 +18,8 @@
         />
 
         <input
-          type="password" @input="validation"
+          type="password"
+          @input="validation"
           v-bind:class="{ error : !isCorrectPassword }"
           name="Password"
           placeholder="Password"
@@ -38,7 +40,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -48,18 +50,18 @@ export default {
       password: "",
       isCorrectUserName: true,
       isCorrectPassword: true,
-      isResponseError: false,
+      isResponseError: false
     };
   },
   methods: {
     checkForm: function(e) {
-     this.validation();
+      this.validation();
       e.preventDefault();
     },
     validation: function() {
       this.isCorrectUserName = true;
       this.isCorrectPassword = true;
-      if ( !this.userName) {
+      if (!this.userName) {
         this.isCorrectUserName = false;
       }
 
@@ -68,25 +70,38 @@ export default {
       }
     },
     login: function() {
-      let json={
+      let json = {
         username: this.userName,
-        password:this.password
+        password: this.password
       };
 
-      axios.post('users/login', json)
-      .then(response => {
-        const token = response.data && response.data.token;
-        if (token) {
-          localStorage.setItem('NOTES_AUTH', token);
-        }
-        this.$router.push('/'); 
-      })
-      .catch(() => {
-        // this.isResponseError = true;
-      });
+      axios
+        .post("users/login", json)
+        .then(response => {
+          const token = response.data && response.data.token;
+          if (token) {
+            localStorage.setItem("NOTES_AUTH", token);
+          }
+        })
+        .catch(() => {
+          // this.isResponseError = true;
+        });
+
+      axios
+        .get("users/me")
+        .then(response => {
+          let user = response.data;
+          localStorage.setItem("username", user.username);
+          localStorage.setItem("id", user.id);
+          localStorage.setItem("full_name", user.full_name);
+
+          this.$router.push("/");
+        })
+        .catch(() => {
+          // this.isResponseError = true;
+        });
     }
   }
-
 };
 </script>
 

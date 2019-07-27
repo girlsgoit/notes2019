@@ -17,7 +17,6 @@ Axios.interceptors.request.use(function (config) {
   if (token) {
     config.headers['Authorization'] = 'Token ' + token;
   }
-
   return config;
 }, function(error) {
   console.log(error);
