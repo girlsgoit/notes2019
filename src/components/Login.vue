@@ -79,10 +79,10 @@ export default {
         if (token) {
           localStorage.setItem('NOTES_AUTH', token);
         }
-        this.$router.push('/'); 
+        this.$router.push('/notes');
       })
-      .catch(() => {
-        // this.isResponseError = true;
+      .catch((err) => {
+          console.log(err);
       });
     }
   }
