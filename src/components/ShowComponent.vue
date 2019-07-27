@@ -3,17 +3,16 @@
     <div v-if="block.tag==='image'" class="img">
       <img v-bind:src="block.content"/>
     </div>
-    <div v-if="block.tag==='ul'" class="list">
-      <li v-repeat="block.content">{{block.content}}</li>
-    </div>
-    <div v-if="block.tag==='a'" class="link">
-      <a href="#">{{block.content}}</a>
+    <ul v-else-if="block.tag==='ul'" class="list">
+      <li v-for="item in displayContent" :key="item">{{item}}</li>
+    </ul>
+    <div v-else-if="block.tag==='link'">
+      <a :href="block.content" class="link">{{block.content}}</a>
     </div>
     <div v-else>
       <component :is="block.tag">{{block.content}}</component>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -22,6 +21,20 @@
         props: {
             block: Object
         },
+        data: function () {
+            return {
+                displayContent: null
+            }
+        },
+        created() {
+            if (this.block) {
+                this.displayContent = this.block.content;
+
+                if (this.block.tag === 'ul') {
+                    this.displayContent = this.displayContent.split('\n');
+                }
+            }
+        }
     }
 </script>
 

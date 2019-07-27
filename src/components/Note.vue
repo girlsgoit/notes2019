@@ -1,38 +1,32 @@
 <template>
   <!-- Note -->
-  <article class="note" @click="disable()">
-    <div>
-      <Header/>
-      <div class="note-container">
-        <section class="note note-editor">
-          <span v-if="blocks.length===0" class="note-editor-empty"></span>
-          <div v-for="(block, index) in blocks" :key="index">
-            <span class="note-editor-add" @click.stop="add(index)"></span>
-            <div class="card">
-              <div class="card-delete">
-                <span class="note-delete" @click="oneDelete(index)">&#215;</span>
-              </div>
-              <ShowComponent :block="block"/>
-            </div>
-          </div>
-          <span class="note-editor-add note-editor-add--last" @click.stop="add(blocks.length)"></span>
-          <button class="note-editor-delete" @click="totalDelete()">Delete this note</button>
-        </section>
-      </div>
+  <div>
+    <Header/>
 
-      <div>
-        <Editor
-            :class="{visible: !isActive}"
+    <section class="note note-editor" @click="disable()">
+      <div class="note-container">
+        <span v-if="blocks.length===0" class="note-editor-empty"></span>
+        <div v-for="(block, index) in blocks" :key="index">
+          <span class="note-editor-add" @click.stop="add(index)"></span>
+          <div class="note-element">
+            <ShowComponent :block="block"/>
+            <div class="note-delete" @click="oneDelete(index)">&#215;</div>
+          </div>
+        </div>
+        <span class="note-editor-add note-editor-add--last" @click.stop="add(blocks.length)"></span>
+        <button class="note-editor-delete" @click="totalDelete()">Delete this note</button>
+      </div>
+    </section>
+
+    <Footer/>
+
+    <Editor :class="{visible: !isActive}"
             :blocks="blocks"
             :index="currentIndex"
             :id="id"
             @blockAdded="blocks=($event)"
             @indexAdded="currentIndex=($event)"/>
-      </div>
-      <Footer/>
-    </div>
-  </article>
-  <!-- End of Note -->
+  </div>
 </template>
 
 <script>
@@ -87,7 +81,7 @@
                 axios
                     .delete("notes/" + this.id)
                     .then(() => {
-                        this.$router.push("/dashboard");
+                        this.$router.push("/notes");
                     })
                     .catch(error => {
                         console.log(error);
@@ -108,108 +102,6 @@
 </script>
 
 <style scoped>
-  .card h1,
-  .card h2,
-  .card h3,
-  .card h4,
-  .card ul,
-  .card p,
-  .card a {
-    margin: 0;
-    padding: 0;
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-  }
-
-  .cards {
-    padding: 50px 0 30px 0;
-  }
-
-  .cards-container {
-    max-width: 960px;
-    display: flex;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-
-  .card ul {
-    padding-left: 17px;
-  }
-
-  .card li {
-    line-height: 40px;
-  }
-
-  .card a {
-    line-height: 30px;
-    color: #278df6;
-    text-decoration: none;
-    font-size: 36px;
-  }
-
-  .cards .column {
-    width: 50%;
-  }
-
-  .card {
-    position: relative;
-    box-shadow: 0 2px 27px rgba(230, 230, 230, 0.5);
-    border-radius: 10px;
-    color: #393939;
-    text-align: left;
-    padding: 30px;
-    transition: box-shadow 0.25s ease;
-    display: block;
-    margin-bottom: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
-    overflow-wrap: break-word;
-  }
-
-  .card-delete {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .card-delete:hover {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-
-  .note-delete {
-    border: 1px solid orangered;
-    width: 25px;
-    height: 25px;
-    border-radius: 15px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: orangered;
-    background-color: white;
-    box-shadow: 0 0 0 1px white;
-    font-size: 20px;
-
-    transform: scale(1.05); /* fixat o miscarea lui x un pic la hover. */
-    transition: transform 0.3s ease;
-
-    cursor: pointer;
-  }
-
-  .note-delete:hover {
-    transform: scale(1.2);
-  }
-
   .visible {
     visibility: hidden;
   }
@@ -223,8 +115,7 @@
     max-width: 960px;
     padding: 0 15px;
     margin: 0 auto;
-    font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+    font-family: Roboto, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: #393939;
     line-height: 1.5;
   }
@@ -271,7 +162,7 @@
 
   .note a {
     font-size: 1.3em;
-    color: #208afa;
+    color: #208AFA;
     text-decoration-line: none;
   }
 
@@ -298,6 +189,7 @@
     border-radius: 0.09px;
   }
 
+
   @media only screen and (max-width: 1150px) {
     .note div.img {
       margin-left: 0;
@@ -306,6 +198,7 @@
   }
 
   @media only screen and (max-width: 960px) {
+
     .note {
       font-size: 14px;
       padding-top: 3em;
@@ -340,10 +233,47 @@
     }
   }
 
+  .note-element {
+    position: relative;
+  }
+
+  .note-delete {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    color: orangered;
+    background-color: white;
+    box-shadow: 0 0 0 1px white;
+    font-size: 18px;
+
+    border: 1px solid orangered;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -13px;
+
+    transform: scale(1.05); /* fixat o miscarea lui x un pic la hover. */
+    transition: transform 0.3s ease;
+
+    cursor: pointer;
+  }
+
+  .note-element:hover .note-delete {
+    display: flex;
+  }
+
+  .note-delete:hover {
+    transform: scale(1.2);
+  }
+
   .note-editor {
     font-size: 16px;
-    font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+    font-family: Roboto, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 60px 0;
   }
 
@@ -358,10 +288,6 @@
     opacity: 0;
   }
 
-  .note-editor-add--last {
-    margin: 1rem 0;
-  }
-
   .note-editor-add:hover {
     opacity: 1;
     transition: opacity 0.3s ease;
@@ -370,7 +296,7 @@
   .note-editor-add:before {
     content: "";
     display: block;
-    border-bottom: 1px solid #208afa;
+    border-bottom: 1px solid #208AFA;
     position: relative;
     top: 15px;
   }
@@ -380,10 +306,10 @@
     width: 30px;
     height: 30px;
     text-align: center;
-    border: 1px solid #208afa;
+    border: 1px solid #208AFA;
     display: inline-block;
     border-radius: 15px;
-    color: #208afa;
+    color: #208AFA;
     line-height: 28px;
     background-color: white;
     box-shadow: 0 0 0 10px white;
@@ -402,13 +328,17 @@
     text-align: center;
     content: "It's empty, add some content.";
     font-weight: 400;
-    color: #a9a9a9;
+    color: #A9A9A9;
     font-size: 1.5em;
     padding: 1em 0;
   }
 
   .note-editor-add:hover:after {
     transform: scale(1);
+  }
+
+  .note-editor-add--last {
+    margin: 2rem 0;
   }
 
   .note-editor-delete {
