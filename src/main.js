@@ -1,20 +1,35 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 import VueRouter from 'vue-router';
-import Note from './components/Note.vue'
-import Home from './components/Home.vue'
-import Axios from 'axios'
+import Note from './components/Note.vue';
+import Home from './components/Home.vue';
+import Login from './components/Login.vue';
+import Settings from './components/Settings.vue';
+import Register from './components/Register.vue';
+import Axios from 'axios';
 
 Axios.defaults.baseURL = 'https://notes-api.girlsgoit.org/';
 
+Axios.interceptors.request.use(function (config) {
+  const token = localStorage.getItem('NOTES_AUTH');
+
+  if (token) {
+    config.headers['Authorization'] = 'Token ' + token;
+  }
+
+  return config;
+}, function(error) {
+  console.log(error);
+});
+
 Vue.use(VueRouter);
+
 const rute = [
-  {
-  path: "/", component: Home
-  }, 
-  { 
-    path: "/note/:id", component: Note 
-  },
+  { path: '/', component: Home },
+  { path: '/settings', component: Settings },
+  { path: '/login', component: Login },
+  { path: '/register', component: Register },
+  { path: '/note/:id', component: Note },
 ];
 
 const router = new VueRouter({
@@ -28,4 +43,3 @@ new Vue({
   render: h => h(App),
   router
 }).$mount('#app');
-
