@@ -15,7 +15,7 @@
               <ShowComponent :block="block"/>
             </div>
           </div>
-          <span class="note-editor-add" @click.stop="add(blocks.length)"></span>
+          <span class="note-editor-add note-editor-add--last" @click.stop="add(blocks.length)"></span>
           <button class="note-editor-delete" @click="totalDelete()">Delete this note</button>
         </section>
       </div>
@@ -117,7 +117,7 @@
   .card a {
     margin: 0;
     padding: 0;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: normal;
   }
@@ -154,10 +154,9 @@
 
   .card {
     position: relative;
-    box-shadow: 0px 2px 27px rgba(230, 230, 230, 0.5);
+    box-shadow: 0 2px 27px rgba(230, 230, 230, 0.5);
     border-radius: 10px;
     color: #393939;
-    font-family: Georgia;
     text-align: left;
     padding: 30px;
     transition: box-shadow 0.25s ease;
@@ -165,7 +164,6 @@
     margin-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px;
-    white-space: word-wrap;
     overflow-wrap: break-word;
   }
 
@@ -360,6 +358,10 @@
     opacity: 0;
   }
 
+  .note-editor-add--last {
+    margin: 1rem 0;
+  }
+
   .note-editor-add:hover {
     opacity: 1;
     transition: opacity 0.3s ease;
@@ -400,7 +402,6 @@
     text-align: center;
     content: "It's empty, add some content.";
     font-weight: 400;
-    padding: 0 0 3em 0;
     color: #a9a9a9;
     font-size: 1.5em;
     padding: 1em 0;
