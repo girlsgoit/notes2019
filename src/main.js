@@ -7,7 +7,8 @@ import Login from './components/Login.vue';
 import Settings from './components/Settings.vue';
 import Register from './components/Register.vue';
 import Help from './components/Help.vue';
-import Axios from 'axios';
+import DashboardList from './components/DashboardList.vue';
+import Axios from 'axios'
 
 Axios.defaults.baseURL = 'https://notes-api.girlsgoit.org/';
 
@@ -28,8 +29,9 @@ const rute = [
   { path: '/', component: Home },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
+  { path: "/notes", component: DashboardList },
+  { path: "/notes/:id", component: Note },
   { path: "/users/:id", component: Settings },
-  { path: "/note/:id", component: Note },
   { path: "/help", component: Help },
 ];
 
