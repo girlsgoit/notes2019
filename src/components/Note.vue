@@ -1,32 +1,43 @@
 <template>
   <!-- Note -->
   <article class="note">
-    <div class="note-container">
-      <section class="note note-editor">
-        <span v-if="blocks.length===0" class="note-editor-empty"></span>
-        <div v-for="(block, index) in blocks" :key="index">
-          <span class="note-editor-add" @click="add(index)"></span>
-          <ShowComponent :block="block" />
-          <button @click="oneDelete(index)"></button>
-        </div>
-        <span class="note-editor-add" @click="add(blocks.length)"></span>
-        <button class="note-editor-delete" @click="totalDelete()">Delete this note</button>
-      </section>
+    <div>
+      <Header />
+      <div class="note-container" >
+        <section class="note note-editor">
+          <span v-if="blocks.length===0" class="note-editor-empty"></span>
+          <div v-for="(block, index) in blocks" :key="index">
+            <span class="note-editor-add" @click="add(index)"></span>
+            <div class="card">
+              <div class="card-delete">
+                <span class="note-delete" @click="oneDelete(index)">&#215;</span>
+              </div>
+              <ShowComponent :block="block" />
+            </div>
+          </div>
+          <span class="note-editor-add" @click="add(blocks.length)"></span>
+          <button class="note-editor-delete" @click="totalDelete()">Delete this note</button>
+        </section>
+      </div>
 
       <div :class="{visible: !isActive}">
         <Editor
           :blocks="blocks"
           :index="currentIndex"
+          :id="id"
           @blockAdded="blocks=($event)"
           @indexAdded="currentIndex=($event)"
-        /> 
+        />
       </div>
+      <Footer />
     </div>
   </article>
   <!-- End of Note -->
 </template>
 
 <script>
+import Footer from "./Footer.vue";
+import Header from "./Header.vue";
 import ShowComponent from "./ShowComponent.vue";
 import Editor from "./Editor.vue";
 import axios from "axios";
@@ -35,19 +46,17 @@ export default {
   name: "Note",
   components: {
     Editor,
-    ShowComponent
+    ShowComponent,
+    Header,
+    Footer
   },
   data: function() {
     return {
-      blocks: [
-        {
-          tag: "h1",
-          content: "Hello world"
-        }
-      ],
+      blocks: [],
       currentIndex: 0,
       id: 0,
-      isActive: false
+      isActive: false,
+      art: {}
     };
   },
   created: function() {
@@ -56,16 +65,8 @@ export default {
   },
 
   methods: {
-    save: function(tag, content) {
-      let newBlock = {
-        tag: tag,
-        content: content
-      };
-      this.blocks.splice(this.currentIndex, 0, newBlock);
-      this.currentIndex++;
-      axios.post().then(response => (this.blocks = response.data.note_elements));
-    },
     add: function(position) {
+      console.log(position)
       this.currentIndex = position;
       this.isActive = true;
     },
@@ -75,25 +76,32 @@ export default {
     getNotes: function() {
       axios
         .get("notes/" + this.id)
-        .then(response => (this.blocks = response.data.note_elements))
-        .catch(error => {console.log(error)});
+        .then(response => {
+          console.log(response);
+          this.blocks = response.data.note_elements;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     totalDelete: function() {
       axios
         .delete("notes/" + this.id)
-        .then(response => {
-              this.blocks = response.data;
-              console.log(response);
-              this.blocks = ''
-              })
-        .catch(error => {console.log(error)});
-        this.blocks = ''; 
+        .then(() => {
+          this.$router.push("/dashboard");
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     oneDelete(index) {
       this.blocks.splice(index, 1);
-        axios
-        .post("notes/" + this.id, this.blocks)
-        .then(response => (this.blocks = response.data.note_elements))
+      console.log(this.blocks);
+      axios
+        .put("notes/" + this.id, { note_elements: this.blocks })
+        .then(response => {
+          this.blocks = response.data.note_elements;
+        })
         .catch(error => console.log(error));
     }
   }
@@ -101,6 +109,108 @@ export default {
 </script>
 
 <style scoped>
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card ul,
+.card p,
+.card a {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.cards {
+  padding: 50px 0 30px 0;
+}
+
+.cards-container {
+  max-width: 960px;
+  display: flex;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.card ul {
+  padding-left: 17px;
+}
+
+.card li {
+  line-height: 40px;
+}
+
+.card a {
+  line-height: 30px;
+  color: #278df6;
+  text-decoration: none;
+  font-size: 36px;
+}
+
+.cards .column {
+  width: 50%;
+}
+
+.card {
+  position: relative;
+  box-shadow: 0px 2px 27px rgba(230, 230, 230, 0.5);
+  border-radius: 10px;
+  color: #393939;
+  font-family: Georgia;
+  text-align: left;
+  padding: 30px;
+  transition: box-shadow 0.25s ease;
+  display: block;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  white-space: word-wrap;
+  overflow-wrap: break-word;
+}
+
+.card-delete {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.card-delete:hover {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.note-delete {
+  border: 1px solid orangered;
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: orangered;
+  background-color: white;
+  box-shadow: 0 0 0 1px white;
+  font-size: 20px;
+
+  transform: scale(1.05); /* fixat o miscarea lui x un pic la hover. */
+  transition: transform 0.3s ease;
+
+  cursor: pointer;
+}
+
+.note-delete:hover {
+  transform: scale(1.2);
+}
 .visible {
   visibility: hidden;
 }

@@ -1,6 +1,6 @@
 <template>
 <div>
-          <div v-if="block.tag==='img'" class="img">
+          <div v-if="block.tag==='image'" class="img">
             <img v-bind:src="block.content" />
           </div>
           <div v-if="block.tag==='ul'" class="list">

@@ -1,28 +1,32 @@
 
 <template>
-  <div class="editor-box">
-    <div class="editor-text">
-      <textarea placeholder="Write your text" v-model="cont"></textarea>
-    </div>
-    <div class="editor-buttons">
-      <button class="h1-button" @click="save('h1', cont)">H1</button>
-      <button class="h2-button" @click="save('h2', cont)">H2</button>
-      <button class="h3-button" @click="save('h3', cont)">H3</button>
-      <button class="p-button" @click="save('p', cont)">P</button>
-      <button class="ul-button" @click="save('ul', cont)">UL</button>
-      <button class="link-button" @click="save('link', cont)">LINK</button>
-      <button class="image-button" @click="save('image', cont)">IMAGE</button>
+  <div class="editor-wrapper">
+    <div class="editor-box" @click.stop>
+      <div class="editor-text">
+        <textarea placeholder="Write your text" v-model="cont"></textarea>
+      </div>
+      <div class="editor-buttons">
+        <button class="h1-button" @click="save('h1', cont)">H1</button>
+        <button class="h2-button" @click="save('h2', cont)">H2</button>
+        <button class="h3-button" @click="save('h3', cont)">H3</button>
+        <button class="p-button" @click="save('p', cont)">P</button>
+        <button class="ul-button" @click="save('ul', cont)">UL</button>
+        <button class="link-button" @click="save('link', cont)">LINK</button>
+        <button class="image-button" @click="save('image', cont)">IMAGE</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Editor",
   props: {
     blocks: Array,
     index: Number,
-    id: Number
+    id: String
   },
 
   data: function() {
@@ -40,12 +44,24 @@ export default {
         tag: tag,
         content: content
       };
-      this.cont= '';
+      if (!content) {
+        return;
+      }
+
+      this.cont = "";
       this.blocksMod.splice(this.indexMod, 0, newBlock);
       this.indexMod++;
-      this.$emit("blockAdded", this.blocksMod);
-      this.$emit("indexAdded", this.indexMod);
-    }
+      axios
+        .put("/notes/" + this.id, { note_elements: this.blocks })
+        .then(response => {
+          console.log(response);
+          this.$emit("indexAdded", this.indexMod);
+          this.$emit("blockAdded", response.data.note_elements);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
   }
 };
 </script>

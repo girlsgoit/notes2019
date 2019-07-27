@@ -89,7 +89,7 @@ export default {
       } else {
         axios.post('/users/is-unique', {username: this.form.userName })
         .then()
-        .catch(error => {
+        .catch(() => {
           this.errorMessages.push({message: "User Name is already registered", id:0 });
           this.inputInfoList[0].class.error = true;  
         });
@@ -125,10 +125,10 @@ export default {
         };
 
          axios.post('/users/register', user)
-         .then(response => {
+         .then(() => {
            this.$router.push('/login');
          })
-         .catch(error => {
+         .catch(() => {
            this.errorMessages.push({ message : "Register Error"})
          });
        }
