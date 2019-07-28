@@ -4,7 +4,7 @@
     <section class="cards">
       <div class="cards-container">
         <div class="column">
-          <div class="card" v-for="(note, index) in leftColumnNotes" :class="{'card-image' : isImage(note.note_elements)}" :key="index">
+          <div class="card" :class="{'card-image' : isImage(note.note_elements)}" v-for="(note, index) in leftColumnNotes" :key="index">
               <div v-if="note.note_elements[0]">
                  <NoteElement :tag="note.note_elements[0].tag" :value="note.note_elements[0].content" />
               </div>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="column">
-          <div class="card" v-for="(note, index) in rightColumnNotes" v-bind:key="index">
+          <div class="card" :class="{'card-image' : isImage(note.note_elements)}" v-for="(note, index) in rightColumnNotes" v-bind:key="index">
             <div v-if="note.note_elements[0]">
                 <NoteElement :tag="note.note_elements[0].tag" :value="note.note_elements[0].content" />
             </div>
