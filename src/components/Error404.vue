@@ -5,10 +5,10 @@
       <p class='line1'>404-PAGE NOT FOUND</p>
       <p class='text2'>The page you are looking for might have been removed, had it's name changed or is temporarily
         unavailable.</p>
-      <a href="index.html">Go to homepage</a>
+      <a href="/">Go to homepage</a>
     </div>
   </div>
-    
+
 </template>
 
 <script>

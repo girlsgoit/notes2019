@@ -19,7 +19,7 @@ export default {
     data: function() {
         return {
             listContent: null,
-        }   
+        }
     },
     created: function() {
         if (this.tag === 'ul') {

@@ -11,7 +11,7 @@
         <input
           @input="validation"
           type="text"
-          v-bind:class="{ error : !isCorrectUserName }"
+          :class="{ error : !isCorrectUserName }"
           name="UserName"
           placeholder="User Name"
           v-model="userName"
@@ -20,7 +20,7 @@
         <input
           type="password"
           @input="validation"
-          v-bind:class="{ error : !isCorrectPassword }"
+          :class="{ error : !isCorrectPassword }"
           name="Password"
           placeholder="Password"
           v-model="password"
@@ -76,30 +76,31 @@ export default {
       };
 
       axios
-        .post("users/login", json)
+        .post('users/login', json)
         .then(response => {
           const token = response.data && response.data.token;
+
           if (token) {
-            localStorage.setItem("NOTES_AUTH", token);
+            localStorage.setItem('NOTES_AUTH', token);
           }
+
+          axios
+            .get('users/me')
+            .then(response => {
+              let user = response.data;
+              localStorage.setItem('USER_NAME', user.username);
+              localStorage.setItem('USER_ID', user.id);
+              localStorage.setItem('FULL_NAME', user.full_name);
+
+              this.$router.push('/notes');
+              window.location.reload();
+            });
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          this.isResponseError = true;
         });
 
-      axios
-        .get("users/me")
-        .then(response => {
-          let user = response.data;
-          localStorage.setItem("username", user.username);
-          localStorage.setItem("id", user.id);
-          localStorage.setItem("full_name", user.full_name);
 
-          this.$router.push("/notes");
-        })
-        .catch(error => {
-         console.log(error);
-        });
     }
   }
 };

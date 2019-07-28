@@ -1,41 +1,47 @@
 <template>
-    <div>
-  <Header/>
-  <Hero/>
-  <About/>
-  <Features/>
-  <Gallery/>
-  <Partners/>
-  <Footer/>
-    </div>
-
+  <div>
+    <HeaderLoggedOut :user="user" />
+    <Hero/>
+    <About/>
+    <Features/>
+    <Gallery/>
+    <Partners/>
+    <Footer/>
+  </div>
 </template>
 
-
 <script>
-
 import Footer from "./Footer.vue";
 import Partners from "./Partners.vue";
 import Gallery from "./Gallery.vue";
 import Features from "./Features.vue";
 import About from "./About.vue";
 import Hero from "./Hero.vue";
-import Header from "./Header.vue";
+import HeaderLoggedOut from './HeaderLoggedOut.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    Header,
+    HeaderLoggedOut,
     Hero,
     About,
     Features,
     Gallery,
     Partners,
     Footer,
-
+  },
+  data: function () {
+    return {
+      user: {
+        token: localStorage.getItem('NOTES_AUTH'),
+      },
+    }
+  },
+  mounted() {
+    if (this.user.token) {
+      this.$router.push('/notes');
+    }
   }
-
-
 };
 </script>
 
@@ -45,7 +51,7 @@ export default {
     font-family: 'Roboto', sans-serif;
 }
 
-.header-container { 
+.header-container {
     max-width: 960px;
     align-items: center;
     display: flex;
@@ -100,7 +106,7 @@ export default {
     .header {
         text-align: center;
     }
-    
+
     .header-container {
         flex-direction: column;
     }
@@ -110,7 +116,7 @@ export default {
     .header-middle {
         width: 100%;
     }
-    
+
     .header-middle{
         order:-1;
     }
@@ -271,19 +277,19 @@ export default {
              background: #FAFAFA;
              padding: 90px 0;
          }
-         
+
          .features-container {
              max-width: 960px;
              padding: 30px;
              margin: 0 auto;
          }
-         
+
          .features-header {
              margin-top: 0;
              padding: 0;
              margin-bottom: 60px;
          }
-         
+
          .features-title {
              font-family: Roboto;
              font-style: normal;
@@ -296,7 +302,7 @@ export default {
              margin: 0;
              margin-bottom: 30px;
          }
-         
+
          .features {
              display: flex;
              list-style: none;
@@ -305,11 +311,11 @@ export default {
              padding: 0;
              margin: 0;
          }
-         
+
          .features img {
              margin-bottom: 30px;
          }
-         
+
          .feature h3 {
              font-family: Roboto;
              font-style: normal;
@@ -318,11 +324,11 @@ export default {
              font-weight: 500;
              margin-top: 0;
          }
-         
+
          .feature {
              padding: 0 15px;
          }
-         
+
          .feature p {
              font-family: Roboto;
              font-style: normal;
@@ -332,7 +338,7 @@ export default {
              margin: 0 auto;
              max-width: 400px;
          }
-         
+
          .features-subtitle {
              font-family: Roboto;
              font-style: normal;
@@ -343,7 +349,7 @@ export default {
              max-width: 600px;
              margin: 0 auto;
          }
-         
+
          @media screen and (max-width: 1000px) {
              .features-subtitle {
                  font-size: 13px;
@@ -374,7 +380,7 @@ export default {
     line-height: 0;
 }
 .gallery img {
-    width: 100%; 
+    width: 100%;
     object-fit: cover;
     height: 238px;
 }
