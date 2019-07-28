@@ -72,6 +72,9 @@
                     .then(response => {
                         console.log(response);
                         this.blocks = response.data.note_elements;
+                        if (this.blocks.length === 0) {
+                            this.add(0);
+                        }
                     })
                     .catch(error => {
                         console.log(error);
