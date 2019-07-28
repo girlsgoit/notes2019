@@ -2,7 +2,7 @@
     <section class="hero">
         <img src="https://picsum.photos/id/180/2400/1600" alt="image">
         <div class="hero-text">
-            <h1 class="hero-title">Right now.Write here.
+            <h1 class="hero-title">Right now. Write here.
             </h1>
             <p class="hero-subtitle">Place your thoughts on the shelves, remember the important things, be punctual with "Notes"</p>
         </div>
@@ -69,7 +69,7 @@ export default {
 }
 
 .hero-subtitle {
-    line-height: 1.25;
+    line-height: 1.5;
     font-size: 24px;
     max-width: 580px;
     margin: 0 auto;
@@ -100,5 +100,3 @@ export default {
     }
 }
     </style>
-
-
