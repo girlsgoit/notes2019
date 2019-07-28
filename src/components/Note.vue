@@ -1,8 +1,6 @@
 <template>
   <!-- Note -->
   <div>
-    <Header/>
-
     <section class="note note-editor" @click="disable()">
       <div class="note-container">
         <span v-if="blocks.length===0" class="note-editor-empty"></span>
@@ -31,7 +29,6 @@
 
 <script>
     import Footer from "./Footer.vue";
-    import Header from "./Header.vue";
     import ShowComponent from "./ShowComponent.vue";
     import Editor from "./Editor.vue";
     import axios from "axios";
@@ -41,7 +38,6 @@
         components: {
             Editor,
             ShowComponent,
-            Header,
             Footer
         },
         data: function () {

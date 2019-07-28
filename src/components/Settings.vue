@@ -7,7 +7,7 @@
         <button @click="settings">SAVE SETTINGS</button>
       </div>
     </section>
-   
+
     <!-- end of tool-bar -->
     <section class="settings">
       <div class="settings-container">
@@ -83,9 +83,8 @@ export default {
   },
   created: function() {
     this.id = this.$route.params.id;
-    axios.get('users/'+ this.id) 
+    axios.get('users/'+ this.id)
     .then(response => {
-      console.log(response)
       this.fullName=response.data.full_name;
       this.customTheme=response.data.settings;
       this.username=response.data.username;
@@ -108,13 +107,13 @@ export default {
         this.isCorrectOldPassword = true;
       }
 
-      if (!this.newPassword || this.newPassword == this.oldPassword) {
+      if (!this.newPassword || this.newPassword === this.oldPassword) {
         this.isCorrectNewPassword = false;
       } else {
         this.isCorrectNewPassword = true;
       }
 
-      if (!this.confirmPassword || this.confirmPassword != this.newPassword) {
+      if (!this.confirmPassword || this.confirmPassword !== this.newPassword) {
         this.isCorrectConfirmPassword = false;
       } else {
         this.isCorrectConfirmPassword = true;
@@ -132,12 +131,10 @@ export default {
         username: this.username,
         password: this.password,
         settings: this.customTheme,
-
       };
       axios.put('users/'+ this.id, json)
       .then(response => {
-        console.log(response)
-        this.info = response.data
+        this.info = response.data;
       });
     }
   }

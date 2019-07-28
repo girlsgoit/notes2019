@@ -2,15 +2,15 @@
     <header class="header">
         <div class="header-container">
             <div class="header-left">
-                <a href="/settings" class="headerleft">
-                    {{user.fullName}}
+                <a :href="`/users/${this.user.id}`" class="headerleft">
+                    {{ user.fullName }}
                 </a>
             </div>
             <div class="header-middle">
                 <a href="/" class="logo">
                     <img src="../assets/images/logo.svg" alt="Logo">
                 </a>
-                
+
              </div>
             <div class="header-right">
                 <nav>
@@ -47,9 +47,9 @@ export default {
         },
         redirectToSignOut: function(){
             localStorage.removeItem("NOTES_AUTH");
-            localStorage.removeItem("full_name");
-            localStorage.removeItem("username");
-            localStorage.removeItem("id");
+            localStorage.removeItem("FULL_NAME");
+            localStorage.removeItem("USER_NAME");
+            localStorage.removeItem("USER_ID");
             this.$router.push('/');
         }
     }
@@ -63,7 +63,7 @@ export default {
     font-family: 'Roboto', sans-serif;
 }
 
-.header-container { 
+.header-container {
     max-width: 960px;
     align-items: center;
     display: flex;
@@ -118,7 +118,7 @@ export default {
     .header {
         text-align: center;
     }
-    
+
     .header-container {
         flex-direction: column;
     }
@@ -128,7 +128,7 @@ export default {
     .header-middle {
         width: 100%;
     }
-    
+
     .header-middle{
         order:-1;
     }

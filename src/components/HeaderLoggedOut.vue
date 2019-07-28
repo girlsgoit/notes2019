@@ -28,9 +28,8 @@
 
 
 <script>
-export default {  
+export default {
     name: 'HeaderLoggedOut',
-
 }
 </script>
 
@@ -41,7 +40,7 @@ export default {
     font-family: 'Roboto', sans-serif;
 }
 
-.header-container { 
+.header-container {
     max-width: 960px;
     align-items: center;
     display: flex;
@@ -96,7 +95,7 @@ export default {
     .header {
         text-align: center;
     }
-    
+
     .header-container {
         flex-direction: column;
     }
@@ -106,7 +105,7 @@ export default {
     .header-middle {
         width: 100%;
     }
-    
+
     .header-middle{
         order:-1;
     }
