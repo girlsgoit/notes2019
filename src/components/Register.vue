@@ -76,13 +76,13 @@ export default {
   },
   methods: {
     onSubmit: function() {
-   
+
       this.errorMessages = [];
       for (let i = 0; i < this.inputInfoList.length; i++) {
           this.inputInfoList[i].class.error = false;
       }
 
-      
+
 
       if (this.form.userName === "") {
         this.errorMessages.push({ message: "UserName is required", id: 0 });
@@ -91,10 +91,10 @@ export default {
         .then()
         .catch(() => {
           this.errorMessages.push({message: "User Name is already registered", id:0 });
-          this.inputInfoList[0].class.error = true;  
+          this.inputInfoList[0].class.error = true;
         });
 
-        
+
       }
 
       if (this.form.password == "") {
@@ -115,7 +115,7 @@ export default {
       }
 
        for (let error of this.errorMessages) {
-         this.inputInfoList[error.id].class.error = true;  
+         this.inputInfoList[error.id].class.error = true;
        }
        if (this.errorMessages.length==0 ){
         const user = {
@@ -133,12 +133,19 @@ export default {
          });
        }
     }
-  }
+  },
+  mounted() {
+    const token = localStorage.getItem('NOTES_AUTH');
+
+    if (token) {
+      this.$router.push('/notes');
+    }
+  },
 };
 </script>
-     
-    
-     
+
+
+
 <style scoped>
 .account {
   background-color: #f2f2f2;

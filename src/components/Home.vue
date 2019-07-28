@@ -41,7 +41,7 @@ export default {
     if (this.user.token) {
       this.$router.push('/notes');
     }
-  }
+  },
 };
 </script>
 

@@ -16,7 +16,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="" @click="redirectToSettings()">
+                            <a :href="`/users/${this.user.id}`">
                                 SETTINGS
                             </a>
                         </li>
@@ -44,6 +44,7 @@ export default {
     methods: {
         redirectToSettings: function(){
             this.$router.push('/users/' + this.user.id);
+
         },
         redirectToSignOut: function(){
             localStorage.removeItem("NOTES_AUTH");

@@ -99,10 +99,15 @@ export default {
         .catch(() => {
           this.isResponseError = true;
         });
-
-
     }
-  }
+  },
+  mounted() {
+    const token = localStorage.getItem('NOTES_AUTH');
+
+    if (token) {
+      this.$router.push('/notes');
+    }
+  },
 };
 </script>
 
