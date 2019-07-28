@@ -93,6 +93,7 @@ export default {
               localStorage.setItem('FULL_NAME', user.full_name);
 
               this.$router.push('/notes');
+              window.location.reload();
             });
         })
         .catch(() => {

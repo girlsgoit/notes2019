@@ -124,6 +124,7 @@ export default {
         margin-bottom: 20px;
         margin-right: 10px;
         margin-left: 10px;
+        cursor: pointer;
     }
 
     .card.card-image {

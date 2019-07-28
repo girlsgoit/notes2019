@@ -16,8 +16,6 @@
       </div>
     </section>
 
-    <Footer/>
-
     <Editor :class="{visible: !isActive}"
             :blocks="blocks"
             :index="currentIndex"
@@ -28,7 +26,6 @@
 </template>
 
 <script>
-    import Footer from "./Footer.vue";
     import ShowComponent from "./ShowComponent.vue";
     import Editor from "./Editor.vue";
     import axios from "axios";
@@ -38,7 +35,6 @@
         components: {
             Editor,
             ShowComponent,
-            Footer
         },
         data: function () {
             return {

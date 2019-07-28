@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderLoggedOut />
+    <HeaderLoggedOut :user="user" />
     <Hero/>
     <About/>
     <Features/>
@@ -30,11 +30,17 @@ export default {
     Partners,
     Footer,
   },
-  props: ['user'],
-  created() {
-
-    console.log('landing created');
-    console.log(this.props.user);
+  data: function () {
+    return {
+      user: {
+        token: localStorage.getItem('NOTES_AUTH'),
+      },
+    }
+  },
+  mounted() {
+    if (this.user.token) {
+      this.$router.push('/notes');
+    }
   }
 };
 </script>
