@@ -4,7 +4,7 @@
     <section class="cards">
       <div class="cards-container">
         <div class="column">
-          <div class="card" :class="{'card-image' : isImage(note.note_elements)}" v-for="(note, index) in leftColumnNotes" :key="index">
+          <div class="card" :class="{'card-image' : isImage(note.note_elements)}" v-for="(note, index) in leftColumnNotes" @click="onCardClick(note.id)" :key="index">
               <div v-if="note.note_elements[0]">
                  <NoteElement :tag="note.note_elements[0].tag" :value="note.note_elements[0].content" />
               </div>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="column">
-          <div class="card" :class="{'card-image' : isImage(note.note_elements)}" v-for="(note, index) in rightColumnNotes" v-bind:key="index">
+          <div class="card" :class="{'card-image' : isImage(note.note_elements)}" v-for="(note, index) in rightColumnNotes" :key="index" @click="onCardClick(note.id)">
             <div v-if="note.note_elements[0]">
                 <NoteElement :tag="note.note_elements[0].tag" :value="note.note_elements[0].content" />
             </div>
@@ -67,7 +67,11 @@ export default {
   methods: {
     isImage: function(nestedElements) {
       return nestedElements[0] && nestedElements[0].tag === 'image';
-    }
+    },
+    onCardClick: function(noteId) {
+        console.log('noteId: ', noteId);
+        this.$router.push(`/notes/${noteId}`);
+    },
   }
 };
 </script>
