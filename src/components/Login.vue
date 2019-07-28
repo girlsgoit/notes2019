@@ -3,7 +3,7 @@
     <img src="../assets/images/logo.svg" alt="Logo" />
 
     <div v-if="!isCorrectPassword || !isCorrectUserName || isResponseError" class="error-list">
-      <p>*Something went wrong.</p>
+      <p>*Please check your credentials</p>
     </div>
 
     <form class="auth-form" @submit="checkForm">
@@ -61,13 +61,13 @@ export default {
     validation: function() {
       this.isCorrectUserName = true;
       this.isCorrectPassword = true;
-      if (!this.userName) {
-        this.isCorrectUserName = false;
-      }
-
-      if (!this.password) {
-        this.isCorrectPassword = false;
-      }
+      // if (!this.userName) {
+      //   this.isCorrectUserName = false;
+      // }
+      //
+      // if (!this.password) {
+      //   this.isCorrectPassword = false;
+      // }
     },
     login: function() {
       let json = {

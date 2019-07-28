@@ -8,7 +8,7 @@
             <li v-for="item in listContent" :key="item">{{item}}</li>
         </ul>
         <a v-if="tag == 'link'" :href="value">{{ value }}</a>
-        <img v-if="tag == 'image'" :src="value" />
+        <img style="max-width: 100%" v-if="tag == 'image'" :src="value" />
     </div>
 </template>
 
