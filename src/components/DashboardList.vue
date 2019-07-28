@@ -10,7 +10,9 @@
               </div>
               <div v-else>
                Empty
-              </div> 
+              </div>
+
+              <p class="notes-data"> {{ note.created_at }} </p> 
           </div>
         </div>
 
@@ -22,6 +24,8 @@
             <div v-else>
                Empty 
             </div>
+
+            <p class="notes-data"> {{ note.created_at }} </p>
           </div>
         </div>
       </div>
@@ -47,7 +51,7 @@ export default {
       }
     };
 
-    axios.get("/notes/", {}, config.headers.Authorization).then(response => {
+    axios.get("/notes/", config.headers.Authorization).then(response => {
       this.notes = response.data;
 
       for (let index = 0; index < this.notes.length; index++) {
@@ -66,7 +70,11 @@ export default {
       notes: []
     };
   },
-  methods: {}
+  methods: {
+    isImage: function(firstElement) {
+      return firstElement && firstElement.tag === 'image';
+    }
+  }
 };
 </script>
 
