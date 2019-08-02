@@ -87,11 +87,6 @@
                   <img src="../assets/images/partners/aise.png" alt="Academia de Inovare și Schimbare prin Educație">
                 </a>
               </li>
-              <li>
-                <a href="https://amigo.studio/">
-                  <img src="../assets/images/partners/amigo.png" alt="Amigo">
-                </a>
-              </li>
             </ul>
       </section>
     </div>
